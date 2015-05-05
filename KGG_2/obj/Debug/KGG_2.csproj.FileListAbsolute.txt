@@ -1,0 +1,13 @@
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\bin\Debug\KGG_2.exe.config
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\bin\Debug\KGG_2.exe
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\bin\Debug\KGG_2.pdb
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.csprojResolveAssemblyReference.cache
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\MainWindow.baml
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\MainWindow.g.cs
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\App.g.cs
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2_MarkupCompile.cache
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.g.resources
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.Properties.Resources.resources
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.csproj.GenerateResource.Cache
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.exe
+c:\users\андрей\documents\visual studio 2013\Projects\KGG_2\KGG_2\obj\Debug\KGG_2.pdb
