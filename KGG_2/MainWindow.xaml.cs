@@ -33,7 +33,7 @@ namespace KGG_2
         private void DrawPoint(Vector point)
         {
             double x = Math.Round(point.X * step + canvasSize / 2);
-            double y = Math.Round(point.Y * step + canvasSize / 2);
+            double y = Math.Round(-point.Y * step + canvasSize / 2);
             Point _point = new Point(x, y);
             Ellipse elipse = new Ellipse();
 
@@ -51,34 +51,26 @@ namespace KGG_2
         {
             return new Vector(0,d-b*c);
         }
-        
-        private Vector[] GetNeighbors(Vector point)
+
+        private Vector[] GetNeighbors(Vector point, bool secondBranch = false)
         {
-            //var result = new List<Vector>();
-            //for (double i = -1; i <= 1; i+=1)
-            //    for (double j = -1; j <= 1; j+=1)
-            //        if (i != 0 || j != 0)
-            //            result.Add(new Vector(point.X + i / step, point.Y + j / step));
-            //return result.ToArray();
             return new Vector[] 
             { 
                 new Vector(point.X+1.0/step, point.Y),
-                new Vector(point.X, point.Y +(reverse ? -1.0 : 1.0)/step)
+                new Vector(point.X, point.Y +(secondBranch ^ reverse ? 1.0 : -1.0)/step)
             }; 
         }
         private double CheckFunction (Vector point)
         {
-            return Math.Abs(point.Y * point.X + (d - b * c) * point.X + c * a);
+            return Math.Abs(-point.Y * point.X + (d - b * c) * point.X + c * a);
         }
-        private Vector GetBestNeighbor(Vector point, Vector last)
+        private Vector GetBestNeighbor(Vector point, bool secondBranch = false)
         {
             var neighbors = GetNeighbors(point);
             var idOfSmallest = 0;
             var smallestValue = CheckFunction(neighbors[0]);
             for (int i = 1; i < neighbors.Length; i++)
             {
-                if (neighbors[i].Equals(last))
-                    continue;
                 var potencialSmallest = CheckFunction(neighbors[i]);
                 if (potencialSmallest < smallestValue)
                 {
@@ -92,7 +84,11 @@ namespace KGG_2
         private bool InCanvas(Vector point)
         {
             return -canvasSize / 2 / step <= point.X && point.X <= canvasSize / 2 / step &&
-                -canvasSize / 2 / step <= point.X && point.Y <= canvasSize / 2 / step;
+                -canvasSize / 2 / step <= point.Y && point.Y <= canvasSize / 2 / step;
+        }
+        private int Sign(double value)
+        {
+            return (int)((value) / Math.Abs(value));
         }
 
         private void BDraw_Click(object sender, RoutedEventArgs e)
@@ -114,18 +110,18 @@ namespace KGG_2
             var centreHyperbola = GetCentreHyperbola();
 
             int startX = -canvasSize / 2 / step;
-            var stepPoint = new Vector(startX, centreHyperbola.Y);
-            var lastPoint = stepPoint;
-            int i = 0;
-
-            while (InCanvas(stepPoint) && i<600)
+            Vector stepPoint = new Vector(startX, centreHyperbola.Y);
+            while (InCanvas(stepPoint))
             {
                 DrawPoint(stepPoint);
-                DrawPoint(new Vector(-stepPoint.X, 2 * centreHyperbola.Y - stepPoint.Y));
-                Vector tmp = stepPoint;
-                stepPoint = GetBestNeighbor(stepPoint, lastPoint);
-                lastPoint = tmp;
-                i++;
+                stepPoint = GetBestNeighbor(stepPoint);
+            }
+
+            stepPoint = new Vector(0, -Sign(stepPoint.Y) * canvasSize / 2 / step);
+            while (InCanvas(stepPoint))
+            {
+                DrawPoint(stepPoint);
+                stepPoint = GetBestNeighbor(stepPoint);
             }
 
         }
