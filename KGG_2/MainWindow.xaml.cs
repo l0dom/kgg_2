@@ -47,26 +47,26 @@ namespace KGG_2
             canvas.Children.Add(elipse);
         }
 
-        private Vector GetCentreHyperbola()
-        {
-            return new Vector(0,d-b*c);
-        }
 
         private Vector[] GetNeighbors(Vector point, bool secondBranch = false)
         {
             return new Vector[] 
             { 
-                new Vector(point.X+1.0/step, point.Y),
+                new Vector(point.X+(secondBranch? -1.0 : 1.0)/step, point.Y),
                 new Vector(point.X, point.Y +(secondBranch ^ reverse ? 1.0 : -1.0)/step)
             }; 
         }
-        private double CheckFunction (Vector point)
+        private double CheckFunction(Vector point, bool secondBranch = false)
         {
             return Math.Abs(-point.Y * point.X + (d - b * c) * point.X + c * a);
         }
+        private double GetYFromX(double x)
+        {
+            return c * (a / x - b) + d;
+        }
         private Vector GetBestNeighbor(Vector point, bool secondBranch = false)
         {
-            var neighbors = GetNeighbors(point);
+            var neighbors = GetNeighbors(point, secondBranch);
             var idOfSmallest = 0;
             var smallestValue = CheckFunction(neighbors[0]);
             for (int i = 1; i < neighbors.Length; i++)
@@ -107,21 +107,19 @@ namespace KGG_2
                 MessageBox.Show("Text must be Double");
                 return;
             }
-            var centreHyperbola = GetCentreHyperbola();
-
-            int startX = -canvasSize / 2 / step;
-            Vector stepPoint = new Vector(startX, centreHyperbola.Y);
+            var X = -canvasSize / 2 / step;
+            Vector stepPoint = new Vector(X, GetYFromX(X));
             while (InCanvas(stepPoint))
             {
                 DrawPoint(stepPoint);
                 stepPoint = GetBestNeighbor(stepPoint);
             }
 
-            stepPoint = new Vector(0, -Sign(stepPoint.Y) * canvasSize / 2 / step);
+            stepPoint = new Vector(-X, GetYFromX(-X));
             while (InCanvas(stepPoint))
             {
                 DrawPoint(stepPoint);
-                stepPoint = GetBestNeighbor(stepPoint);
+                stepPoint = GetBestNeighbor(stepPoint, true);
             }
 
         }
