@@ -12,6 +12,7 @@
         <Label Content="c:" HorizontalAlignment="Left" Margin="184,9,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TD" HorizontalAlignment="Left" Height="23" Margin="286,13,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="63"/>
         <Label Content="d:" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="600" Margin="10,53,0,0" VerticalAlignment="Top" Width="600" Fill="#FFF4F4F5" Stroke="Black"/>
         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="600" Margin="10,53,0,0" VerticalAlignment="Top" Width="600"/>
             
 
